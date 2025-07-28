@@ -1,0 +1,204 @@
+{{ 'section-arko-collection-list-scroller.css' | asset_url | stylesheet_tag }}
+<style>
+	#shopify-section-{{ section.id }} .block-section {
+		margin-top: {{ section.settings.spacing_top | times: 0.8 | round: 0 }}px;
+		margin-bottom: {{ section.settings.spacing_bottom | times: 0.8 | round: 0 }}px;
+	}
+	@media (min-width: 990px) {
+		#shopify-section-{{ section.id }} .block-section {
+			margin-top: {{ section.settings.spacing_top }}px;
+			margin-bottom: {{ section.settings.spacing_bottom }}px;
+		}
+	}
+</style>
+{%- if  section.blocks.size > 0 -%}
+<div class="container"> 
+  <div class="block-section">
+  <div class="slider">
+    <div class="ctop-content"><h3>{{ section.settings.heading }}</h3></div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+        <div class="swiper-slide">
+          {% if block.settings.c_link != blank %}
+            <a class="main-link" href="{{ block.settings.c_link }}">
+            {% endif %}
+          <div class="swiper-inner">
+              <div class="swiper-content">
+              {% if block.settings.c_pic != blank %}
+              <img src="{{ block.settings.c_pic | img_url: '60x' }}" alt="{{ image.alt }}">
+              {% endif %}
+              <div class="c-content">
+                <div class="c-title">{{ block.settings.c_title }}</div>
+              </div>
+            </div>
+          </div>
+            {% if block.settings.c_link != blank %}
+            </a>
+            {% endif %}
+        </div>
+        {%- endfor -%}
+      </div>
+    
+      <!-- pagination -->
+      <div class="swiper-pagination"></div>
+    
+      <!-- scrollbar -->
+      {% if section.settings.en_scroller %}
+      <div class="swiper-scrollbar"></div>
+      {% endif %}
+    
+    </div> 
+  </div>
+  </div>
+</div>
+{% endif %}
+<style>
+  .swiper-content{
+    background-color:{{ section.settings.colorBackground }} ;
+  }
+  .swiper-content .c-content .c-title{
+    color:{{ section.settings.colorText }} ;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .main-link{
+  display: inline-block;
+    width: auto;
+    height: auto;  
+  }
+</style>
+<script>
+var $swiperSelector = $('.swiper-container');
+
+$swiperSelector.each(function(index) {
+    var $this = $(this);
+    $this.addClass('swiper-slider-' + index);
+    
+    var dragSize = $this.data('drag-size') ? $this.data('drag-size') : 50;
+    var freeMode = $this.data('free-mode') ? $this.data('free-mode') : false;
+    var loop = $this.data('loop') ? $this.data('loop') : false;
+    var slidesDesktop = $this.data('slides-desktop') ? $this.data('slides-desktop') : 4;
+    var slidesTablet = $this.data('slides-tablet') ? $this.data('slides-tablet') : 3;
+    var slidesMobile = $this.data('slides-mobile') ? $this.data('slides-mobile') : 2.5;
+    var spaceBetween = $this.data('space-between') ? $this.data('space-between'): 10;
+
+    var swiper = new Swiper('.swiper-slider-' + index, {
+      direction: 'horizontal',
+      loop: loop,
+      freeMode: freeMode,
+      spaceBetween: spaceBetween,
+      breakpoints: {
+        1920: {
+          slidesPerView: slidesDesktop
+        },
+        992: {
+          slidesPerView: slidesTablet
+        },
+        320: {
+           slidesPerView: slidesMobile
+        }
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        draggable: true,
+        dragSize: dragSize
+      }
+   });
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Collection list scroller",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "heading"
+      },
+      {
+        "type": "color",
+        "id": "colorBackground",
+        "label": "CollectionBox Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "colorText",
+        "label": "Collection Title",
+        "default": "#000"
+      },
+      {
+        "type": "checkbox",
+        "id": "en_scroller",
+        "label": "Enable Scroll Bar",
+        "default": false
+      },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "default": 60,
+      "label": "t:sections.all.section_spacing.spacing_top.label"
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "default": 60,
+      "label": "t:sections.all.section_spacing.spacing_bottom.label"
+    }
+],
+"blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+            {
+              "type": "text",
+              "id": "c_title",
+             "label": "Collection Title"
+            },
+            {
+              "type": "url",
+              "id": "c_link",
+             "label": "Collection Link"
+            },
+            {
+              "type": "image_picker",
+              "id": "c_pic",
+             "label": "Collection picture"
+            }
+        ]
+      }
+   ],
+  "presets": [
+    {
+      "name": "Collection list scroller",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}

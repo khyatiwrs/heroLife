@@ -1,0 +1,244 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "webrex_seo_optimizer_breadcrumb_section_bPbTmR": {
+          "type": "shopify://apps/webrex-seo-ai-optimizer-schema/blocks/breadcrumbSection/b26797ad-bb4d-48f5-8ef3-7c561521049c",
+          "disabled": true,
+          "settings": {
+            "visible_on_desktop": true,
+            "visible_on_mobile": false,
+            "firstItemText": "Home",
+            "seperateSymbol": ">>",
+            "breadcrumbAlignment": "flex-start",
+            "font_size": 17,
+            "mainColour": "#25a333",
+            "seperateColour": "#232323",
+            "hoverColor": "#2680c6",
+            "background_color": "rgba(0,0,0,0)",
+            "uppercase": false,
+            "hoverUnderline": true,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "spaceBetween": 0,
+            "marginBottom": 0,
+            "menu": "",
+            "allCollectionsLabel": "All Products",
+            "showProductTitle": true,
+            "productCollectionPrioritize": false,
+            "priorityCollection": "smallest",
+            "blocked_collection_list": [],
+            "showBlogBreadcrumbs": true,
+            "showPageBreadcrumbs": true
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_vendor": false,
+            "show_subtitle": true,
+            "show_stock": false,
+            "show_sku": true,
+            "show_barcode": false,
+            "barcode_label": "Barcode",
+            "show_rating": false,
+            "hide_empty_star_rating": true,
+            "show_custom_badges": true,
+            "price_text": "",
+            "inline_title_price": false
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity": true,
+            "show_add_to_cart": true,
+            "show_buy_now": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "variants": {
+          "type": "variants",
+          "settings": {
+            "picker_type": "dropdown",
+            "hide_single_variant": true,
+            "out_of_stock_variants": "show"
+          }
+        },
+        "d2ff8842-3c43-4346-b216-9ee939776648": {
+          "type": "shopify://apps/appstle-subscription/blocks/appstle-subscription-product-page-widget/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
+          "settings": {}
+        },
+        "icon_A6XBU6": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "trust_text1": "Icon  1",
+            "trust_text2": "Icon  2",
+            "trust_text3": "Icon  3",
+            "trust_text4": "Icon  4"
+          }
+        },
+        "8e5a6cdd-0a75-4276-9811-0da552ee3383": {
+          "type": "description",
+          "settings": {
+            "desc_type": "simple",
+            "title": "Description",
+            "icon": "",
+            "expanded": false,
+            "tab1name": "Specs",
+            "tab1content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "tab2name": "FAQs/Docs/Videos",
+            "tab2content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+        },
+        "4081fe2e-8c6a-4811-b506-423346b10cbe": {
+          "type": "expandable",
+          "disabled": true,
+          "settings": {
+            "title": "What’s Included?",
+            "icon": "",
+            "text": "<p> {{ product.metafields.custom.product_info_details1 | metafield_tag }}</p>",
+            "expanded": false
+          }
+        },
+        "c0e683ce-9791-4ded-9357-a024c9d0394e": {
+          "type": "expandable",
+          "disabled": true,
+          "settings": {
+            "title": "Specs",
+            "icon": "",
+            "text": "<p>video link</p>",
+            "expanded": false
+          }
+        },
+        "6c8a6c3d-6433-4b9a-bc93-31bc6b47cb03": {
+          "type": "expandable",
+          "disabled": true,
+          "settings": {
+            "title": "FAQs/Docs/Videos",
+            "icon": "",
+            "text": "<p>Share additional product information such as usage instructions, sizing guides, etc.</p>",
+            "expanded": false
+          }
+        },
+        "w3_product_accessories_widget_nBtBgd": {
+          "type": "shopify://apps/w3-product-accessories/blocks/widget/cebf1474-e4fa-4cb4-a91e-d313690bf6f1",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "webrex_seo_optimizer_breadcrumb_section_bPbTmR",
+        "title",
+        "price",
+        "buy_buttons",
+        "variants",
+        "d2ff8842-3c43-4346-b216-9ee939776648",
+        "icon_A6XBU6",
+        "8e5a6cdd-0a75-4276-9811-0da552ee3383",
+        "4081fe2e-8c6a-4811-b506-423346b10cbe",
+        "c0e683ce-9791-4ded-9357-a024c9d0394e",
+        "6c8a6c3d-6433-4b9a-bc93-31bc6b47cb03",
+        "w3_product_accessories_widget_nBtBgd"
+      ],
+      "custom_css": [
+        ".price-item.price-item-regular span {}",
+        ".breadcrumb .container {padding-left: 0;}",
+        ".breadcrumb {border-bottom: none; font-size: 16px; color: #000000; font-weight: 500;}",
+        ".product-info-secondary-be11fc2d-1d60-493b-a14b-e6b0913451eb {border-top: none; padding-top: 0; margin-bottom: 0; margin-top: 0; align-items: flex-end;}"
+      ],
+      "settings": {
+        "hide_variants": false,
+        "thumbnail_navigation": true,
+        "thumbnail_pos": false,
+        "sticky_info": true,
+        "image_zoom_type": "none",
+        "image_disclaimer": "",
+        "image_fit": "contain"
+      }
+    },
+    "17146758315e3baabe": {
+      "type": "apps",
+      "blocks": {
+        "vitals_related_products_YTbwdT": {
+          "type": "shopify://apps/vitals/blocks/related-products/aeb48102-2a5a-4f39-bdbd-d8d49f4e20b8",
+          "settings": {}
+        },
+        "vitals_recently_viewed_6nJpGX": {
+          "type": "shopify://apps/vitals/blocks/recently-viewed/aeb48102-2a5a-4f39-bdbd-d8d49f4e20b8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vitals_related_products_YTbwdT",
+        "vitals_recently_viewed_6nJpGX"
+      ],
+      "custom_css": [
+        ".vtl-rv-main-widget .vtl-product-card__title-inner {text-align: left !important;}"
+      ],
+      "settings": {
+        "full_width": false
+      }
+    },
+    "custom_liquid_PtRRnz": {
+      "type": "custom-liquid",
+      "settings": {
+        "title": "",
+        "full_width": false,
+        "liquid": "",
+        "color_scheme": "background-1"
+      }
+    },
+    "video-product": {
+      "type": "video-product",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "video_url": ""
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "custom_css": [
+        ".price-item.price-item-regular span {font-size: 20px; font-weight: 600;}",
+        ".sup {display: none;}"
+      ],
+      "settings": {
+        "show": true,
+        "title": "Related Products",
+        "count": "5",
+        "show_vendor": false,
+        "show_stock": false,
+        "show_rating": false,
+        "color_scheme": "background-1",
+        "spacing_top": 0,
+        "spacing_bottom": 32
+      }
+    }
+  },
+  "order": [
+    "main",
+    "17146758315e3baabe",
+    "custom_liquid_PtRRnz",
+    "video-product",
+    "recommendations"
+  ]
+}

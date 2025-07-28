@@ -1,0 +1,241 @@
+{% capture bsscommerce_login_require_template %}{% include 'bsscommerce_login_require' %}{% endcapture -%}
+{%- unless bsscommerce_login_require_template contains 'Liquid error' -%}
+  {{- bsscommerce_login_require_template -}}
+{%- endunless %}
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>{{ 'bss-hide-variant.css' | asset_url | stylesheet_tag }}
+    {{ 'tiny.content.min.css' | asset_url | stylesheet_tag }}
+    <meta charset="utf-8">
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %}
+        &ndash; {% assign page_tags = current_tags | join: ', ' -%}
+        {{- 'accessibility.page_title.tagged_as' | t: tags: page_tags -}}
+      {%- endif -%}
+      {%- if current_page != 1 %}
+        &ndash; {{ 'accessibility.page_title.page_number' | t: page_number: current_page -}}
+      {%- endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description or shop.name %}
+      <meta name="description" content="{{ page_description | default: shop.name | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <link rel="preconnect" href="//cdn.shopify.com" crossorigin>
+
+    {% unless settings.typography_headings.system? and settings.typography_body.system? %}
+      <link rel="preconnect" href="//fonts.shopifycdn.com" crossorigin>
+    {% endunless %}
+
+    {% comment %}theme-check-disable AssetPreload{% endcomment %}
+    {% unless settings.typography_body.system? %}
+      <link rel="preload" as="font" href="{{ settings.typography_body | font_url }}" type="font/woff2" crossorigin>
+    {% endunless %}
+    {% unless settings.typography_headings.system? %}
+      <link rel="preload" as="font" href="{{ settings.typography_headings | font_url }}" type="font/woff2" crossorigin>
+    {% endunless %}
+    {% comment %}theme-check-enable AssetPreload{% endcomment %}
+
+    {% render 'head-css' %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'custom-style.css' | asset_url | stylesheet_tag }}
+
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'scripts.js' | asset_url }}" defer="defer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js" defer="defer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.css">
+
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% endif %}
+
+    {{ content_for_header }}
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9W96RYZH9S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9W96RYZH9S');
+    </script>
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+      	document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+
+    {%- if request.design_mode -%}
+      {{ 'section-slideshow.css' | asset_url | stylesheet_tag }}
+      {{ 'flickity.css' | asset_url | stylesheet_tag }}
+      {{ 'component-scroller.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'flickity.pkgd.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'carousel-slider.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'slideshow.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'map.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'recipient-form.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'countdown.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if customer.metafields.sparklayer.authentication -%}
+      <!-- Anything inside here only shows for logged in customers -->
+      <!-- Start of SparkLayer core script -->
+      <script>
+        window.sparkOptions = {
+          siteId: "herolifecaremg",
+          platform: "shopify",
+          rootUrl: {{ routes.root_url | json }},
+          language: {{ request.locale.iso_code | json }},
+          accountRedirect: {
+            urlRegex: /\/account/g,
+            goTo: "/index", // page to redirect logged in users to
+          },
+          display: {
+            stock: {
+              show: false, // set to true to show stock level display
+              max: 50, // highest stock level to show
+              last: 5, // last remaining stock
+              low: 15, // low stock threshold
+              last: true, // set to false to hide last stock message
+            },
+          },
+          auth: {
+            user: {{ customer.email | json }},
+            token: {{ customer.metafields.sparklayer.authentication | json }},
+          },
+        };
+      </script>
+      <script async src="https://cdn.sparklayer.io/spark.1.25.x.js"></script>
+      <!-- End of SparkLayer core script -->
+      <!-- SparkLayer Sample CSS Code -->
+      <style type="text/css">
+         :root {
+           /* Set the brand styling */
+           --b2b-brand-color: #25a901; /* Main brand colour*/
+           --b2b-brand-color-hover: #333; /* Main brand colour hover */
+           --b2b-brand-font: Poppins, sans-serif; /* Main brand font */
+           --b2b-brand-font-heading: Poppins, sans-serif; /* Main brand heading font */
+
+           /* Update colours */
+           --spark-default-body-color: #555555; /* Main body colour*/
+           --spark-primary-color: #000000; /* Main title colour*/
+           --spark-secondary-color: var(--b2b-brand-color); /* Main highlight colour*/
+           --spark-link-color: var(--b2b-brand-color); /* Link colour*/
+
+           /* Typefaces */
+           --spark-font-default: var(--b2b-brand-font); /* Body typeface*/
+           --spark-font-highlight: var(--b2b-brand-font-heading); /* Highlight typeface*/
+           --spark-font-weight-default: 400; /* Default font weight*/
+           --spark-font-weight-medium: 500; /* Medium font weight*/
+           --spark-font-weight-heavy: 600; /* Bold font weight*/
+
+           /* General */
+           --spark-border-radius-default: 0; /* Default border radius*/
+           --spark-drawer-max-width: 700px; /* Width of overlay*/
+           --spark-drawer-max-width-wide: 1000px; /* Width of overlay in maximised view*/
+
+           /* Font sizes */
+           --spark-font-default-size: 14px; /* Default font size*/
+           --spark-font-default-size-small: 14px; /* Default font size - small screens*/
+           --spark-header-font: var(--b2b-brand-font-heading); /* Header typeface*/
+           --spark-header-font-weight: 500; /* Header font weight*/
+           --spark-h1-fontsize: 24px; /* Header 1 font size*/
+           --spark-h2-fontsize: 22px; /* Header 2 font size*/
+           --spark-h3-fontsize: 20px; /* Header 3 font size*/
+           --spark-h4-fontsize: 16px; /* Header 4 font size*/
+           --spark-h5-fontsize: 15px; /* Header 5 font size*/
+           --spark-h6-fontsize: 14px; /* Header 6 font size*/
+
+           --spark-pricing-fontsize: 20px; /* Font size of pricing*/
+           --spark-pricing-font-weight: 600; /* Font weight of pricing*/
+           --spark-pricing-fontsize-small: 14px; /* Font size of pricing on mobile*/
+
+           --spark-product-code-fontsize: 16px; /* Font size of product code*/
+           --spark-product-code-font-weight: 500; /* Font weight of product code*/
+           --spark-product-code-fontsize-small: 14px; /* Font size of product code on mobile*/
+           --spark-product-stockstatus-align: flex-start; /* Aligment of stock status for single variants*/
+
+           /* Buttons */
+           --spark-button-font-family: var(--b2b-brand-font-heading); /* Button typeface*/
+           --spark-button-color: var(--b2b-brand-color); /* Default sutton colour*/
+           --spark-button-color-highlight: var(--b2b-brand-color-hover); /* Default button colour hover*/
+           --spark-button-large-color: var(--b2b-brand-color); /* Large button colour*/
+           --spark-button-large-color-highlight: var(--b2b-brand-color-hover); /* Large button colour hover*/
+           --spark-border-radius-button: 0; /* Button border radius*/
+           --spark-button-font-weight: 600; /* Button font weight*/
+           --spark-button-text-transform: none; /* Button text transform*/
+           --spark-button-text-letter-spacing: 0; /* Button letter spacing*/
+           --spark-button-padding: 1em 2.75em; /* Button padding*/
+           --spark-button-small-font-size: 16px; /* Small button font size*/
+
+           /* Tables */
+           --spark-table-border-color: #CCCCCC; /* Table border colour*/
+           --spark-table-header-background-color: #F1F1F1; /* Table header background*/
+           --spark-table-header-text-color: #222222; /* Table header font colour*/
+           --spark-table-header-font-weight: 500; /* Table header font weight*/
+
+           /* Product Card */
+           --spark-product-card-button-radius: 0; /* Button radius*/
+           --spark-product-card-button-padding: 0.75em 1em; /* Button padding*/
+           --spark-product-card-pricing-font-size: 15px; /* Pricng font size*/
+           --spark-product-card-pricing-font-size-small: 14px; /* Pricng font size on mobile*/
+           --spark-product-card-select-min-height: 0; /* Set a min-height for select menu*/
+
+         }
+
+        #w3-product-accessories,
+         mini-cart {
+           display: none !important
+         }
+      </style>
+      <!-- End SparkLayer Sample CSS Code -->
+    {%- endif -%}
+
+    {{ 'w3-accessories.js' | asset_url | script_tag }}
+  </head>
+
+  <body class="template-{{ template.name }} setting-buttons-{{ settings.buttons_style }} settings-remove-ribbons-{{ settings.remove_card_ribbon }}">
+    <a class="skip-link visually-hidden visually-hidden-focusable" href="#MainContent">
+      {{- 'accessibility.link_messages.skip_to_text' | t -}}
+    </a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="main" role="main" tabindex="-1">
+      {% if settings.breadcrumbs_enabled %}
+        {% render 'breadcrumb' %}
+      {% endif %}
+
+      {{ content_for_layout }}
+      {% capture bsscommerce_passcode_to_see_price_product_custom %}{% render 'bss-passcode-to-see-price-js.liquid' %}{% endcapture -%}
+      {%- unless bsscommerce_passcode_to_see_price_product_custom contains 'Liquid error' -%}
+        {%- render 'bss-passcode-to-see-price-js.liquid' -%}
+      {%- endunless -%}
+      {%- capture bsscommerce_login_to_see_price_product_custom %}{% render 'bsscommerce-login-to-see-price-custom-js.liquid' %}{% endcapture -%}
+      {%- unless bsscommerce_login_to_see_price_product_custom contains 'Liquid error' -%}
+        {%- render 'bsscommerce-login-to-see-price-custom-js.liquid' -%}
+      {%- endunless -%}
+      {%- capture bss_ltap_fl_redirect %}{% render 'bss-ltap-fl-redirect.liquid' %}{% endcapture -%}
+      {%- unless bss_ltap_fl_redirect contains 'Liquid error' -%}
+        {%- render 'bss-ltap-fl-redirect.liquid' -%}
+      {%- endunless %}
+    </main>
+
+    <footer class="footer">
+      {% sections 'footer-group' %}
+      {% render 'header-mini-cart' %}
+    </footer>
+
+    {%- if settings.predictive_search_enabled -%}
+      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+  </body>
+</html>

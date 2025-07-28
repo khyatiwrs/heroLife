@@ -1,0 +1,109 @@
+{%- if  section.blocks.size > 0 and section.settings.show_announcement_bar -%}
+<div class="ab-announcement-bar swiper-container-{{ section.id }}">
+  <div class="ab-messages swiper-wrapper">
+    {%- for block in section.blocks -%}
+    <div class="ab-message swiper-slide swiper-slide-{{ block.id }}">
+      <div class="ab-text">{{block.settings.message}}</div>
+    </div>
+    {%- endfor -%}
+  </div>
+  <div class="ab-swiper-button swiper-button-prev"></div>
+  <div class="ab-swiper-button swiper-button-next"></div>
+</div>
+
+<script>
+  const swiper = new Swiper('.swiper-container-{{ section.id }}', {
+    {%- if section.settings.autoplay %}
+    autoplay: {delay: {{section.settings.delay}} },
+    {%- endif -%}
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+<style>
+  .ab-announcement-bar{
+    background:{{section.settings.colorBackground}};
+    position: relative;
+    overflow: hidden;
+  }
+  .ab-announcement-bar .ab-message{
+    text-align:center;
+    color:{{section.settings.colorText}};;
+  }
+  .ab-announcement-bar .swiper-button-next:after, .ab-announcement-bar .swiper-container-rtl .swiper-button-prev:after,
+  .ab-announcement-bar .swiper-button-prev:after, .ab-announcement-bar .swiper-container-rtl .swiper-button-next:after{
+    font-size: 15px;
+    color:{{section.settings.colorText}};
+  }
+  {%- if  section.blocks.size < 2 %}
+  .ab-announcement-bar .ab-swiper-button{display:none!important;}
+  {%- endif -%}
+  .ab-text{
+       text-align: center;
+    height: 35px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+ .swiper-container-{{ section.id }} .swiper-slide{
+   width:100% !important;
+ }
+  .swiper-button-next,.swiper-button-next.swiper-button-disabled,.swiper-button-prev,.swiper-button-prev.swiper-button-disabled{
+    z-index:1;
+  }
+</style>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Custom Announcement Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_announcement_bar",
+        "label": "Show"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay"
+      },
+      {
+        "type": "text",
+        "id": "delay",
+        "label": "Delay between transitions (in ms)",
+        "default": "5000"
+      },
+      {
+        "type": "color",
+        "id": "colorBackground",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "colorText",
+        "label": "Text color",
+        "default": "#000"
+      }
+],
+"blocks": [
+      {
+        "type": "header",
+        "name": "Message",
+        "settings": [
+            {
+              "id": "message",
+              "type": "textarea",
+             "label": "Message"
+            }
+        ]
+      }
+]
+  }
+{% endschema %}

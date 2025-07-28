@@ -1,0 +1,92 @@
+{%- assign collection_certification = collection.metafields.custom.collection_certifications | split: ',' -%}
+{%- assign collection_certifications = collection.metafields.custom.collection_certifications.value -%}
+{% if collection_certification.size > 0 %}
+  <section class="collection-certifications">
+    <div class="container">
+      <h2>{{ section.settings.dynamic_title }}</h2>
+      <div class="certifications">
+        {% for item in section.settings.certifications %}
+          <div class="cert-item">
+            <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.title }}">
+            <p>{{ item.title }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="description-text">
+        {{ section.settings.description }}
+      </div>
+
+      <h3>{{ section.settings.subheading }}</h3>
+      <div class="features">
+        {% for blog in collection_certifications %}
+          {% assign image = blog.icon.value %}
+
+          <div class="feature-item">
+            <img src="{{ image | img_url: 'small' }}" alt="{{ blog.title }}">
+            <p>{{ blog.title }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% schema %}
+{
+  "name": "Collection Certifications",
+  "settings": [
+      {
+      "type": "text",
+      "id": "dynamic_title",
+      "label": "Title",
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Main Description"
+    },
+
+
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Certification",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Certification Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Certification Title"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Feature Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Certifications",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

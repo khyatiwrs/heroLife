@@ -1,0 +1,48 @@
+@media(max-width:767px){
+  .dropbtn svg{
+    width:25px;
+    height:25px;
+  }
+  .dropbtn {
+    padding: 7px;
+    width: 40px;
+}
+  .h-dropdown-title {
+    font-size: 12px;
+    font-weight: 500;
+}
+  .cart-drawer-toggle .head-slot-nav-link {
+    /* background: #25a902; */
+    border-radius: 50%;
+    padding: 0 5px;
+    height: 40px;
+}
+    .cart-drawer-toggle .head-slot-nav-link svg{
+    padding: 3px;
+}
+  .accunts-menu {
+    margin-right: 10px;
+}
+  .header-brand-info {
+    margin-top:10px;
+}
+}
+  /******************************* mobile fixes the header *************************************/
+  @media(max-width:990px){
+   .head-slot-item .accunts-menu{
+      display:none !important; 
+    }
+    .cart-drawer-toggle .h-dropdown-title{
+      display:none !important;
+    }
+    .header-promo .promo-title{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+    .header-heading img,
+	.header-heading svg {
+		width:calc({{ section.settings.logo_width }}px - 50px) ;
+	}
+  }
+

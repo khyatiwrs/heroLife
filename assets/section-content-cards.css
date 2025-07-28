@@ -1,0 +1,15 @@
+.card {
+  background-color: dodgerblue;
+  color: white;
+  padding: 1rem;
+  height: 4rem;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  padding: 1rem;
+}
